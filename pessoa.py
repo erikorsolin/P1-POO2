@@ -1,38 +1,31 @@
 class Pessoa:
     def __init__(self, nome: str, cpf: str, telefone: str, cep: str):
-        self.__nome = nome
-        self.__cpf = cpf
-        self.__telefone = telefone
-        self.__cep = cep
+        self.nome = nome
+        self.cpf = cpf
+        self.telefone = telefone
+        self.cep = cep
+    
+    def get_nome(self):
+        return self.nome
+    
+    def set_nome(self, nome):
+        self.nome = nome
 
-    @property
-    def nome(self):
-        return self.__nome
+    def get_cpf(self):
+        return self.cpf
     
-    @property
-    def cpf(self):
-        return self.__cpf
+    def set_cpf(self, cpf):
+        self.cpf = cpf
     
-    @property
-    def telefone(self):
-        return self.__telefone
+    def get_telefone(self):
+        return self.telefone
     
-    @property
-    def cep(self):
-        return self.__cep
+    def set_telefone(self, telefone):
+        self.telefone = telefone
     
-    @nome.setter
-    def nome(self, nome):
-        self.__nome = nome
+    def get_cep(self):
+        return self.cep
     
-    @cpf.setter
-    def cpf(self, cpf):
-        self.__cpf = cpf
-    
-    @telefone.setter
-    def telefone(self, telefone):
-        self.__telefone = telefone
-    
-    @cep.setter
-    def cep(self, cep):
-        self.__cep = cep
+    def set_cep(self, cep):
+        self.cep = cep
+        
