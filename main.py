@@ -41,9 +41,9 @@ while rodando:
             cliente = locadora.autenticar_cliente(email, senha)
             if cliente is not None:
                 logado = True
-                print("Bom te ver novamente {}! Logado com sucesso.".format(cliente.get_nome()))
+                print("\nBom te ver novamente {}! Logado com sucesso.\n".format(cliente.get_nome()))
             else:
-                print("Email ou senha incorretos.")
+                print("\nEmail ou senha incorretos.\n")
 
         # Cadastrar como cliente       
         elif decisao == "2":
@@ -56,7 +56,7 @@ while rodando:
             cliente = Cliente(email, senha, nome, cpf, telefone, cep)
             locadora.add_cliente(cliente)
             logado = True
-            print("Cliente cadastrado com sucesso!")
+            print("\nCliente cadastrado com sucesso!\n")
         
         # Logar como funcionario       
         elif decisao == "3":
@@ -74,11 +74,6 @@ while rodando:
             nome = input("Digite seu nome: ")
             cpf = input("Digite seu CPF: ")
             senha = input("Digite sua senha: ")
-
-            # Verificando se a senha é válida
-            if senha != "123456":
-                print("Não autorizado! Senha incorreta")
-                continue
             telefone = input("Digite seu telefone: ")
             cep = input("Digite seu CEP: ")
 
@@ -88,7 +83,7 @@ while rodando:
             funcionario = Funcionario(matricula, senha, nome, cpf, telefone, cep)
             locadora.add_funcionario(funcionario)
             logado = True
-            print("\nFuncionario cadastrado com sucesso!") 
+            print("\nFuncionario cadastrado com sucesso!")
             print(f"Matricula: {matricula}")
 
 
@@ -97,7 +92,7 @@ while rodando:
     print()  
     print('-'*35)      
     print('Opções do cliente')
-    print('1 - Ver automóveis disponíveis')
+    print('1 - Ver automóveis')
     print('2 - Locar um automóvel')
     print('3 - Reservar um automóvel')
     print('4 - Ver automóveis locados')
@@ -121,11 +116,11 @@ while rodando:
     # Ver automóveis disponíveis
     if acao == 1:
         for automovel in locadora.get_automoveis():
-            print(110*'-')
+            print(120*'-')
             if automovel.get_locado() == False and automovel.get_reservado() == False:
-                print(f' Placa: {automovel.get_placa()} | Modelo: {automovel.get_modelo()} | Tipo: {automovel.get_tipo()} | Cor: {automovel.get_cor()} | Ano: {automovel.get_ano()} | Valor da diária: {automovel.get_valor_diaria()} D')
+                print(f' Placa: {automovel.get_placa()} | Modelo: {automovel.get_modelo()} | Tipo: {automovel.get_tipo()} | Cor: {automovel.get_cor()} | Ano: {automovel.get_ano()} | Valor da diária: {automovel.get_valor_diaria()} -> Disponível')
             else:
-                print(f' Placa: {automovel.get_placa()} | Modelo: {automovel.get_modelo()} | Tipo: {automovel.get_tipo()} | Cor: {automovel.get_cor()} | Ano: {automovel.get_ano()} | Valor da diária: {automovel.get_valor_diaria()} N.D')
+                print(f' Placa: {automovel.get_placa()} | Modelo: {automovel.get_modelo()} | Tipo: {automovel.get_tipo()} | Cor: {automovel.get_cor()} | Ano: {automovel.get_ano()} | Valor da diária: {automovel.get_valor_diaria()} -> Não Disponível')
 
 
     # Locar um automóvel          
@@ -133,14 +128,14 @@ while rodando:
         placa = input("Digite a placa do automóvel que deseja locar: ")
         automovel = locadora.get_automovel(placa)
         if automovel is None:
-            print("Automóvel não encontrado.")
+            print("\nAutomóvel não encontrado.")
             continue
         if automovel.get_locado() == True:
-            print("Automóvel já locado.")
+            print("\nAutomóvel já locado.")
             continue
 
         if automovel.get_reservado() == True:
-            print("Automóvel reservado.")
+            print("\nAutomóvel reservado.")
             continue
         else:
             dias = int(input("Digite a quantidade de dias que deseja locar o automóvel: "))
@@ -152,7 +147,7 @@ while rodando:
             loc.locar(cliente.get_cpf(), automovel, dias)
             cliente.add_locacao(loc)
             locadora.add_locacao(loc)
-            print("Automóvel {} locado com sucesso na data {} com entrega prevista para {}\nValor {} R$!".format(automovel.get_modelo(), loc.get_data_locacao().strftime("%Y-%m-%d às %H:%M"), loc.get_data_devolucao().strftime("%Y-%m-%d às %H:%M"), loc.get_custo_locacao()))
+            print("\nAutomóvel {} locado com sucesso na data {} com entrega prevista para {}\nValor {} R$!".format(automovel.get_modelo(), loc.get_data_locacao().strftime("%Y-%m-%d às %H:%M"), loc.get_data_devolucao().strftime("%Y-%m-%d às %H:%M"), loc.get_custo_locacao()))
             automovel.set_locado(True)
     
 
@@ -161,10 +156,10 @@ while rodando:
         placa = input("Digite a placa do automóvel que deseja reservar: ")
         automovel = locadora.get_automovel(placa)
         if automovel is None:
-            print("Automóvel não encontrado.")
+            print("\nAutomóvel não encontrado.")
             continue
         if automovel.get_reservado() == True:
-            print("Automóvel já reservado.")
+            print("\nAutomóvel já reservado.")
             continue
         else:
             data = input("Digite a data que deseja reservar o automóvel (dd/mm/aaaa): ")
@@ -174,14 +169,14 @@ while rodando:
             res.reservar(cliente.get_cpf(), automovel, data)
             cliente.add_reserva(res)
             locadora.add_reserva(res)
-            print("Automóvel {} reservado com sucesso para a data {} ".format(automovel.get_modelo(), res.get_data()))
+            print("\nAutomóvel {} reservado com sucesso para a data {} ".format(automovel.get_modelo(), res.get_data()))
             automovel.set_reservado(True)
 
 
     # Ver automóveis locados
     if acao == 4:
         if len(cliente.get_locacoes()) == 0:
-            print("Nenhum automóvel locado.")
+            print("\nNenhum automóvel locado.")
         else:
             for locacao in cliente.get_locacoes():
                 print(35*'-')
@@ -205,7 +200,7 @@ while rodando:
         if automovel is None:
             print("Automóvel não encontrado.")
             continue
-        print("Valor da diária: {} R$".format(automovel.get_valor_diaria()))
+        print("\nValor da diária: {} R$".format(automovel.get_valor_diaria()))
     
 
     # Cancelar reserva
@@ -213,10 +208,10 @@ while rodando:
         placa = input("Digite a placa do automóvel que deseja cancelar a reserva: ")
         automovel = locadora.get_automovel(placa)
         if automovel is None:
-            print("Automóvel não encontrado.")
+            print("\nAutomóvel não encontrado.")
             continue
         if automovel.get_reservado() == False:
-            print("Automóvel não reservado.")
+            print("\nAutomóvel não reservado.")
             continue
         else:
             for reserva in cliente.get_reservas():
@@ -224,7 +219,7 @@ while rodando:
                     cliente.get_reservas().remove(reserva)
                     locadora.get_reservas().remove(reserva)
                     automovel.set_reservado(False)
-                    print("Reserva cancelada com sucesso!")
+                    print("\nReserva cancelada com sucesso!")
                     break
 
 
@@ -233,10 +228,10 @@ while rodando:
         placa = input("Digite a placa do automóvel que deseja cancelar a locação: ")
         automovel = locadora.get_automovel(placa)
         if automovel is None:
-            print("Automóvel não encontrado.")
+            print("\nAutomóvel não encontrado.")
             continue
         if automovel.get_locado() == False:
-            print("Automóvel não locado.")
+            print("\nAutomóvel não locado.")
             continue
         else:
             for locacao in cliente.get_locacoes():
@@ -244,15 +239,45 @@ while rodando:
                     cliente.get_locacoes().remove(locacao)
                     locadora.get_locacoes().remove(locacao)
                     automovel.set_locado(False)
-                    print("Locação cancelada com sucesso!")
+                    print("\nLocação cancelada com sucesso!")
                     break
     
 
     # ações do Funcionário
     if acao in [9, 10]:
         senha = input("Digite a senha: ")
-        if senha != funcionario.get_senha():
-            print("Você não possui permissão para realizar esta ação.")
+        if senha != "123456":
+            print("\nVocê não possui permissão para realizar esta ação.")
             continue
         else:
-            pass
+            # Adicionar automóvel
+            if acao == 9:
+                placa = input("Digite a placa do automóvel que deseja cadastrar: ")
+                modelo = input("Digite o modelo do automóvel: ")
+                tipo = input("Digite o tipo do automóvel: ")
+                cor = input("Digite a cor do automóvel: ")
+                ano = input("Digite o ano do automóvel: ")
+                valor_diaria = input("Digite o valor da diária do automóvel: ")
+                automovel = Automovel(placa, modelo, tipo, cor, ano, valor_diaria)
+                locadora.add_automovel(automovel)
+                print("\nAutomóvel cadastrado com sucesso!")
+            
+            # Remover automóvel
+            if acao == 10:
+                placa = input("Digite a placa do automóvel que deseja remover: ")
+                automovel = locadora.get_automovel(placa)
+                if automovel is None:
+                    print("\nAutomóvel não encontrado.")
+                    continue
+                else:
+                    locadora.get_automoveis().remove(automovel)
+                    print("\nAutomóvel removido com sucesso!")
+    
+    if acao == 11:
+        logado = False
+        print("\nVocê saiu da sua conta.")
+        continue
+
+    if acao == 12:
+        print("\nObrigado por utilizar nossos serviços!")
+        rodando = False
