@@ -5,6 +5,7 @@ from reserva import Reserva
 from locacao import Locacao
 from locadora import Locadora
 from datetime import *
+from random import randint
 
 locadora = Locadora()
 
@@ -32,6 +33,8 @@ while rodando:
     # Essa parte do código é referente ao login do Usuário
     while not logado:
         decisao = input("Você deseja:\n1 - Logar como cliente\n2 - Cadastrar como cliente\n3 - Logar como Funcionario\n4 - Cadastrar como Funcionario\n")
+       
+        # Logar como cliente
         if decisao == "1":
             email = input("Digite seu email: ")
             senha = input("Digite sua senha: ")
@@ -41,7 +44,8 @@ while rodando:
                 print("Bom te ver novamente {}! Logado com sucesso.".format(cliente.get_nome()))
             else:
                 print("Email ou senha incorretos.")
-                
+
+        # Cadastrar como cliente       
         elif decisao == "2":
             nome = input("Digite seu nome: ")
             cpf = input("Digite seu CPF: ")
@@ -54,30 +58,38 @@ while rodando:
             logado = True
             print("Cliente cadastrado com sucesso!")
         
+        # Logar como funcionario       
         elif decisao == "3":
-            email = input("Digite seu email: ")
+            matricula = input("Digite sua matrícula: ")
             senha = input("Digite sua senha: ")
-            funcionario = locadora.autenticar_funcionario(email, senha)
+            funcionario = locadora.autenticar_funcionario(matricula, senha)
             if funcionario is not None:
                 logado = True
                 print("Bom te ver novamente {}! Logado com sucesso.".format(funcionario.get_nome()))
             else:
-                print("Email ou senha incorretos.")
+                print("Matricula ou senha incorretos.")
 
+        # Cadastrar como funcionario
         elif decisao == "4":
             nome = input("Digite seu nome: ")
             cpf = input("Digite seu CPF: ")
-            email = input("Digite seu email: ")
             senha = input("Digite sua senha: ")
+
+            # Verificando se a senha é válida
             if senha != "123456":
                 print("Não autorizado! Senha incorreta")
                 continue
             telefone = input("Digite seu telefone: ")
             cep = input("Digite seu CEP: ")
-            funcionario = Funcionario(email, senha, nome, cpf, telefone, cep)
+
+            # Gerando matricula aleatória
+            matricula = 'F'+str(randint(10000, 99999))
+
+            funcionario = Funcionario(matricula, senha, nome, cpf, telefone, cep)
             locadora.add_funcionario(funcionario)
             logado = True
-            print("Funcionario cadastrado com sucesso!") 
+            print("\nFuncionario cadastrado com sucesso!") 
+            print(f"Matricula: {matricula}")
 
 
 
@@ -95,6 +107,9 @@ while rodando:
     print('8 - Cancelar locação')
     print("-"*35)
     print('Opções do Funcionário')
+    print("-"*35)
+    print('9 - Adicionar automóvel ao sistema')
+    print('10 - Remover automóvel do sistema')
     print("-"*35)
     print('Opções gerais')
     print('11 - Deslogar')
@@ -212,7 +227,7 @@ while rodando:
                     print("Reserva cancelada com sucesso!")
                     break
 
-                
+
     # Cancelar locação            
     if acao == 8:
         placa = input("Digite a placa do automóvel que deseja cancelar a locação: ")
@@ -231,3 +246,13 @@ while rodando:
                     automovel.set_locado(False)
                     print("Locação cancelada com sucesso!")
                     break
+    
+
+    # ações do Funcionário
+    if acao in [9, 10]:
+        senha = input("Digite a senha: ")
+        if senha != funcionario.get_senha():
+            print("Você não possui permissão para realizar esta ação.")
+            continue
+        else:
+            pass
