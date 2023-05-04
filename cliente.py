@@ -7,7 +7,8 @@ class Cliente(Pessoa):
         self.email = email
         self.senha = senha
         self.reservas = []
-        self.locacoes = [] 
+        self.locacoes = []
+        self.custo_total = 0
     
     def get_email(self):
         return self.email
@@ -38,3 +39,10 @@ class Cliente(Pessoa):
     
     def remover_locacao(self, locacao):
         self.locacoes.remove(locacao)
+    
+    def get_custo_total(self):
+        return self.custo_total
+    
+    def calcular_custo_total(self):
+        for locacao in self.locacoes:
+            self.custo_total += locacao.get_custo_total()
