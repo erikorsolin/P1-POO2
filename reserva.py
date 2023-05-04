@@ -1,16 +1,17 @@
+import datetime
 class Reserva:
     def __init__(self):
-        self.id_cliente = 0
+        self.cpf_cliente = None
         self.data = None
         self.hora = None
         self.automovel = None
 
-    def reservar(self, cpf_cliente, automovel, data, hora):
+    def reservar(self, cpf_cliente, automovel):
         self.cpf_cliente = cpf_cliente
         self.automovel = automovel
         self.automovel.set_reservado(True)
-        self.data = data
-        self.hora = hora
+        self.data = datetime.date.today()
+        self.hora = datetime.datetime.now().time()
     
     def get_cpf_cliente(self):
         return self.cpf_cliente
