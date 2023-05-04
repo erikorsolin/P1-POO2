@@ -3,16 +3,13 @@ class Reserva:
     def __init__(self):
         self.cpf_cliente = None
         self.data = None
-        self.hora = None
         self.automovel = None
 
-    def reservar(self, cpf_cliente, automovel, data, hora):
+    def reservar(self, cpf_cliente, automovel, data):
         self.cpf_cliente = cpf_cliente
         self.automovel = automovel
-        self.automovel.set_reservado(True)
+        automovel.set_reservado(True)
         self.data = data
-        self.hora = hora
-        print("Reserva do {} para {} às {} realizada com sucesso!".format(self.automovel.get_modelo(), self.data, self.hora))
     
     def get_cpf_cliente(self):
         return self.cpf_cliente
@@ -26,12 +23,6 @@ class Reserva:
     def set_data(self, data):
         self.data = data
 
-    def get_hora(self):
-        return self.hora
-    
-    def set_hora(self, hora):
-        self.hora = hora
-    
     def get_automovel(self):
         return self.automovel
     
