@@ -6,12 +6,13 @@ class Reserva:
         self.hora = None
         self.automovel = None
 
-    def reservar(self, cpf_cliente, automovel):
+    def reservar(self, cpf_cliente, automovel, data, hora):
         self.cpf_cliente = cpf_cliente
         self.automovel = automovel
         self.automovel.set_reservado(True)
-        self.data = datetime.date.today()
-        self.hora = datetime.datetime.now().time()
+        self.data = data
+        self.hora = hora
+        print("Reserva do {} para {} às {} realizada com sucesso!".format(self.automovel.get_modelo(), self.data, self.hora))
     
     def get_cpf_cliente(self):
         return self.cpf_cliente
