@@ -6,9 +6,14 @@ class Locadora:
         self.locacoes = []
         self.funcionarios = []
 
-
     def get_automoveis(self):
         return self.automoveis
+
+    def get_automovel(self, placa):
+        for automovel in self.automoveis:
+            if automovel.get_placa() == placa:
+                return automovel
+        return None
     
     def get_clientes(self):
         return self.clientes
@@ -50,17 +55,11 @@ class Locadora:
         self.funcionarios.append(funcionario)
     
     def remover_funcionario(self, funcionario):
-        self.funcionarios.remove(funcionario)
+        self.funcionarios.remove(funcionario)   
     
     def autenticar_cliente(self, email, senha):
         for cliente in self.clientes:
             if cliente.get_email() == email and cliente.get_senha() == senha:
                 return cliente
-        return None
-
-    def autenticar_funcionario(self, email, senha):
-        for funcionario in self.funcionarios:
-            if funcionario.get_email() == email and funcionario.get_senha() == senha:
-                return funcionario
         return None
     
