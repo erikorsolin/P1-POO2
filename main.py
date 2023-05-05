@@ -74,9 +74,9 @@ while rodando:
             funcionario = locadora.autenticar_funcionario(matricula, senha)
             if funcionario is not None:
                 logado = True
-                print("Bom te ver novamente {}! Logado com sucesso.".format(funcionario.get_nome()))
+                print("\nBom te ver novamente {}! Logado com sucesso.".format(funcionario.get_nome()))
             else:
-                print("Matricula ou senha incorretos.")
+                print("\nMatricula ou senha incorretos.")
 
         # Cadastrar como funcionario
         elif decisao == "4":
@@ -254,9 +254,10 @@ while rodando:
 
     # ações do Funcionário
     if acao in [9, 10]:
-        senha = input("Digite a senha: ")
-        if senha != "123456":
+        matricula = input("Digite sua matrícula: ")
+        if  len(matricula) != 6 and matricula[0] != 'F':
             print("\nVocê não possui permissão para realizar esta ação.")
+            
             continue
         else:
             # Adicionar automóvel
