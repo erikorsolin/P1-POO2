@@ -7,6 +7,11 @@ from locadora import Locadora
 from datetime import *
 from random import randint
 
+'''Para inicializar o programa, basta executar o arquivo main.py em algum interpretador de Python.
+O programa irá iniciar com um menu de opções, onde o usuário poderá escolher entre logar como cliente ou funcionário,
+ou cadastrar como cliente ou funcionário. Após logar, o usuário terá acesso a um menu de opções, onde poderá escolher
+entre as opções disponíveis.'''
+
 locadora = Locadora()
 
 # cor, modelo, tipo, placa, ano, valor_diaria
@@ -20,7 +25,11 @@ automoveis = [Automovel("Azul", "Fiat Uno", "Hatch", "ABC-1234", 2010, 100),
               Automovel("Rosa", "Fiat Cronos", "Sedan", "VWX-9012", 2021, 450),
               Automovel("Roxo", "Fiat Fiorino", "Pickup", "YZA-3456", 2021, 500),
               Automovel("Laranja", "Fiat Ducato", "Pickup", "BCD-7890", 2021, 550),
-              Automovel("Marrom", "Fiat Ducato", "Pickup", "EFG-1234", 2021, 600)]
+              Automovel("Cinza", "Fiat 500", "Hatch", "EFG-1234", 2021, 600),
+              Automovel("Marrom", "Fiat Grand Siena", "Sedan", "HIJ-5678", 2021, 650),
+              Automovel("Dourado", "Fiat Linea", "Sedan", "KLM-9012", 2021, 700),
+              Automovel("Bege", "Fiat Punto", "Hatch", "NOP-3456", 2021, 750)]
+
 
 for automovel in automoveis:
     locadora.add_automovel(automovel)
@@ -272,12 +281,13 @@ while rodando:
                 else:
                     locadora.get_automoveis().remove(automovel)
                     print("\nAutomóvel removido com sucesso!")
-    
+    # Deslogar
     if acao == 11:
         logado = False
         print("\nVocê saiu da sua conta.")
         continue
 
+    # Encerrar programa    
     if acao == 12:
         print("\nObrigado por utilizar nossos serviços!")
         rodando = False
