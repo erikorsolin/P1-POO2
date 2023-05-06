@@ -268,7 +268,7 @@ while rodando:
                 cor = input("Digite a cor do automóvel: ")
                 ano = input("Digite o ano do automóvel: ")
                 valor_diaria = input("Digite o valor da diária do automóvel: ")
-                automovel = Automovel(placa, modelo, tipo, cor, ano, valor_diaria)
+                automovel = Automovel(cor, modelo, tipo, placa, ano, valor_diaria)
                 locadora.add_automovel(automovel)
                 print("\nAutomóvel cadastrado com sucesso!")
             
