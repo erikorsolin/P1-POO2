@@ -55,7 +55,13 @@ class Locadora:
         self.funcionarios.append(funcionario)
     
     def remover_funcionario(self, funcionario):
-        self.funcionarios.remove(funcionario)   
+        self.funcionarios.remove(funcionario)
+
+    def autenticar_funcionario(self, matricula, senha):
+        for funcionario in self.funcionarios:
+            if funcionario.get_matricula() == matricula and funcionario.get_senha() == senha:
+                return funcionario
+        return None   
     
     def autenticar_cliente(self, email, senha):
         for cliente in self.clientes:
